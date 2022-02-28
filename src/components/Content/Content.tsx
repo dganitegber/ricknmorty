@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+// import React, { useState } from "react";
+import { gql, useQuery } from "@apollo/client";
 import { MyCard } from "../Card";
+// import { MyCard } from "../Card";
+
 import "./Content.css";
 
 // import "./PickleRick.css";
 type ContentProps = {};
 const QUERY_FOR_CHARS = gql`
-  query Chars {
+  query {
     characters {
       results {
         name
@@ -20,28 +22,20 @@ const QUERY_FOR_CHARS = gql`
 
 export const Content: React.FC<ContentProps> = () => {
   const { loading, error, data } = useQuery(QUERY_FOR_CHARS);
-//   const [id, setId] = useState(undefined);
-  const handleClick = (id: number): void => {
-    // setId(id)
-    console.log("last", id);
-  };
+  //   const [id, setId] = useState(undefined);
+  //   const handleClick = (id: number): void => {
+  //     // setId(id)
+  //     console.log("last", id);
+  //   };
   if (loading) return <p>Loading...</p>;
 
-  if (
-    error ||
-    !data ||
-    !data.characters
-    // !data.characters.results.length > 0
-  )
-    return <p>Error :(</p>;
-
-  const {
-    characters: { results },
-  } = data;
-  // const { name, image, species } = results;
+  if (error || !data || !data.characters || !data.characters.results.length)
+    return <p>Error : </p>;
+  console.log(data.characters.results);
+  const results = data.characters.results;
   console.log("results", results);
+  const { name, id, image, species } = results;
   const myCard = results.map((result: any) => {
-    console.log(result.name);
     return (
       <MyCard
         key={result.id}
@@ -49,10 +43,8 @@ export const Content: React.FC<ContentProps> = () => {
         id={result.id}
         image={result.image}
         species={result.species}
-      >
-        hi
-      </MyCard>
+      ></MyCard>
     );
   });
-  return <div className="content"> {myCard} </div>;
+  return myCard;
 };

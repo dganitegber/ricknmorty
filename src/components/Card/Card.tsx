@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { Card, Button } from "@mui/material";
 import MovieFilterIcon from "@mui/icons-material/MovieFilter";
 import "./Card.css";
 
@@ -16,7 +16,6 @@ export const MyCard: React.FC<CardProps> = ({ image, name, species, id }) => {
       <h2 className="name">{name}</h2>
       <h4 className="species">{species}</h4>
       <Button
-    
         className="episodeListButton"
         variant="outlined"
         //   onClick={() => handleClick(id)}
