@@ -7,11 +7,13 @@ import { CardList } from "./components/CardList";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://rickandmortyapi.com/graphql",
+  uri: "https://rickandmortyapi.com/graphql",
   cache: new InMemoryCache(),
 });
 
+
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <div className="App">

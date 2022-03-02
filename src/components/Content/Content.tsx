@@ -34,15 +34,17 @@ export const Content: React.FC<ContentProps> = () => {
   console.log(data.characters.results);
   const results = data.characters.results;
   console.log("results", results);
-  const { name, id, image, species } = results;
+  // const { name, id, image, species } = results;
   const myCard = results.map((result: any) => {
+    const cardOpen: boolean = false;
     return (
       <MyCard
         key={result.id}
         name={result.name}
         id={result.id}
         image={result.image}
-        species={result.species}
+        species={result.species} 
+        cardOpen={cardOpen}    
       ></MyCard>
     );
   });

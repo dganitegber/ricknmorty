@@ -15,33 +15,9 @@ import Button from "@mui/material/Button";
 //     }
 //   }));
 
-type NavBarProps = {};
-const client = new ApolloClient({
-  uri: "rickandmortyapi.com/graphql",
-  cache: new InMemoryCache(),
-});
-const data = async (id: string): Promise<void> =>
-  await client
-    .query({
-      query: gql`
-        query {
-          characters {
-            info {
-              count
-            }
-            results {
-              name
-              type
-              gender
-            }
-          }
-        }
-      `,
-    })
-    .then((result) => console.log(result));
-console.log("data", data);
 
-export const NavBar: React.FC<NavBarProps> = () => {
+
+export const NavBar: React.FC = () => {
   // const classes = useStyles()
   return (
     <div className="NavBar">
