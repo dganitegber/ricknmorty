@@ -1,5 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import { useState } from "react";
 import { MyCard } from "../Card";
 // import { MyCard } from "../Card";
 
@@ -26,13 +25,13 @@ const QUERY_FOR_CHARS = gql`
 
 export const Content: React.FC<ContentProps> = () => {
   const { loading, error, data } = useQuery(QUERY_FOR_CHARS);
-  const [id, setId] = useState(0);
-  const [episodes, setEpisodes] = useState(undefined);
-  const handleClick = (id: number): void => {
-    setId(id);
-    setEpisodes(data.characters.results[id]);
-    console.log("episodes", episodes);
-  };
+  // const [id, setId] = useState(0);
+  // const [episodes, setEpisodes] = useState(undefined);
+  // const handleClick = (id: number): void => {
+  //   setId(id);
+  //   setEpisodes(data.characters.results[id]);
+  //   console.log("episodes", episodes);
+  // };
   if (loading) return <p>Loading...</p>;
 
   if (error || !data || !data.characters || !data.characters.results.length)
