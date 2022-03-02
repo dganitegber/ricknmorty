@@ -1,37 +1,27 @@
-import { gql, useQuery } from "@apollo/client";
-import { Dialog } from "@mui/material";
-import { useEffect, useState } from "react";
-
-const QUERY_FOR_EPISODES = gql`
-  query episodes {
-    episodes {
-      results {
-        name
-        id
-        air_date
-        characters {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+// import { useQuery } from "@apollo/client";
+import { Dialog, DialogTitle, Paper } from "@mui/material";
+import "./CharEpisodes.css";
 
 type CharEpisodesProps = {
   open: boolean;
   id: number;
   onClose: () => void;
+  episodes: string[];
 };
 
-export const CharEpisodes: React.FC<CharEpisodesProps> = ({ onClose, id, open }) => {
-  console.log("open", open);
-  const { loading, error, data } = useQuery(QUERY_FOR_EPISODES);
-  if (loading) return <p>Loading...</p>;
-  console.log("data", data.episodes.results);
- 
-  if (error || !data || !data.episodes || !data.episodes.results.length)
-    return <p>Error : </p>;
+export const CharEpisodes: React.FC<CharEpisodesProps> = ({
+  onClose,
+  id,
+  open,
+  episodes,
+}) => {
+  console.log("episodes", episodes);
+  // const { loading, error, data } = useQuery(QUERY_FOR_EPISODES);
+  // if (loading) return <p>Loading...</p>;
+  // console.log("data", data.episodes.results);
+
+  // if (error || !data || !data.episodes || !data.episodes.results.length)
+  //   return <p>Error : </p>;
 
   //   useEffect(() => {
   //     // setCharacters(data);
@@ -42,11 +32,26 @@ export const CharEpisodes: React.FC<CharEpisodesProps> = ({ onClose, id, open })
   //   console.log("data", data);
   // console.log(result.id);
   return (
-    <Dialog onClose={onClose} open={open}>
-      {data.episodes.results &&
-        data.episodes.results.map((result: any) => {
-          return <div> {result.name} </div>;
-        })}
+    <Dialog
+      PaperProps={{
+        style: {
+          backgroundColor: "white",
+          boxShadow: "none",
+          padding: "20px",
+        },
+      }}
+      fullScreen={false}
+      sx={{ padding: "50px", backgroundColor: "transparent" }}
+      onClose={onClose}
+      open={open}
+    >
+      <DialogTitle> Episode List </DialogTitle>
+      <Paper elevation={0}>
+        {episodes &&
+          episodes.map((episode: any) => {
+            return <div key={episode.id}> {episode.name} </div>;
+          })}
+      </Paper>
     </Dialog>
   );
   //   console.log("epList", epList.result.air_date);

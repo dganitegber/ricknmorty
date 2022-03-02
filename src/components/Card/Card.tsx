@@ -10,11 +10,13 @@ export type CardProps = {
   species: string;
   id: number;
   cardOpen: boolean;
+  episodes: string[];
 };
 
-export const MyCard: React.FC<CardProps> = ({ image, name, species, id }) => {
+export const MyCard: React.FC<CardProps> = ({ episodes, image, name, species, id }) => {
   const [cardOpen, setCardOpen] = useState(false);
   const handleClick = () => {
+    console.log(id);
     setCardOpen(true);
   };
   return (
@@ -34,6 +36,7 @@ export const MyCard: React.FC<CardProps> = ({ image, name, species, id }) => {
         onClose={() => setCardOpen(false)}
         open={cardOpen}
         id={id}
+        episodes={episodes}
       />
     </Card>
   );
